@@ -8,5 +8,5 @@ instantpoll:
       user: poll
       password: testpassw0rd_changeme
       redispassword: testpassw0rd_changeme
-
       redisport: 11111
+      django_secret_key: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

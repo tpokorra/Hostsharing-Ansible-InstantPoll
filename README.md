@@ -37,5 +37,7 @@ Now we can reach our site via:
 
     https://poll.example.org
 
+Login with user `admin` and password `admin` and change it at https://poll.example.org/admin/password_change/
+
 --- Open Source Hosting ---
  https://www.hostsharing.net

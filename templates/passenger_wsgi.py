@@ -1,0 +1,1 @@
+from instantpoll.wsgi import application

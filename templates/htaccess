@@ -1,0 +1,4 @@
+DirectoryIndex disabled
+PassengerFriendlyErrorPages off
+PassengerPython /home/pacs/{{pac}}/users/{{user}}/instantpoll/.venv/bin/python3
+SetEnv PYTHONPATH /home/pacs/{{pac}}/users/{{user}}/instantpoll
