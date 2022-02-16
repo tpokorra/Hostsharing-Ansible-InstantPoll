@@ -12,3 +12,10 @@
    compress
    missingok
 }
+/home/pacs/{{pac}}/users/{{user}}/var/log/gunicorn.log {
+   copytruncate
+   daily
+   rotate 7
+   compress
+   missingok
+}
