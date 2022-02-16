@@ -8,3 +8,9 @@ set mail-format { from: monit@{{pac}}.hostsharing.net }
 check process redis with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/redis-server.pid
   start program "/usr/bin/redis-server /home/pacs/{{pac}}/users/{{user}}/etc/redis.conf"
   stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/redis-server.pid )'"
+
+check process gunicorn with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/gunicorn.pid
+  start program = "/home/pacs/{{pac}}/users/{{user}}/bin/start_gunicorn.sh"
+  stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/gunicorn.pid )'"
+  if failed host 127.0.0.1 port {{gunicorn_port}} protocol http then restart
+  if 5 restarts within 5 cycles then alert

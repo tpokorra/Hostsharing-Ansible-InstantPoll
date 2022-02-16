@@ -68,6 +68,20 @@
       path: /home/pacs/{{pac}}/users/{{user}}/instantpoll/requirements.txt
       regexp: 'psycopg2'
       line: psycopg2
+  - name: make sure we require uvicorn for web sockets
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    lineinfile:
+      path: /home/pacs/{{pac}}/users/{{user}}/instantpoll/requirements.txt
+      regexp: 'uvicorn\[standard\]'
+      line: uvicorn[standard]
+  - name: make sure we require gunicorn
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    lineinfile:
+      path: /home/pacs/{{pac}}/users/{{user}}/instantpoll/requirements.txt
+      regexp: 'gunicorn'
+      line: gunicorn
 
   ##################################
   ## configuration
@@ -78,6 +92,21 @@
     template:
       src: "templates/settings_local.py"
       dest: "/home/pacs/{{pac}}/users/{{user}}/instantpoll/instantpoll/settings_local.py"
+
+  - name: upload gunicorn.conf.py file
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    template:
+      src: "templates/gunicorn.conf.py"
+      dest: "/home/pacs/{{pac}}/users/{{user}}/etc/gunicorn.conf.py"
+
+  - name: upload gunicorn start script
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    template:
+      src: "templates/start_gunicorn.sh"
+      dest: "/home/pacs/{{pac}}/users/{{user}}/bin/start_gunicorn.sh"
+      mode: '0744'
 
   - name: upload restart script
     become: yes
@@ -137,7 +166,8 @@
     become_user: "{{pac}}-{{user}}"
     template:
       src: "templates/htaccess"
-      dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/.htaccess"
+      #dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/.htaccess"
+      dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/htdocs-ssl/.htaccess"
   - name: upload passenger wsgi file
     become: yes
     become_user: "{{pac}}-{{user}}"

@@ -1,4 +1,7 @@
 DirectoryIndex disabled
-PassengerFriendlyErrorPages off
-PassengerPython /home/pacs/{{pac}}/users/{{user}}/instantpoll/.venv/bin/python3
-SetEnv PYTHONPATH /home/pacs/{{pac}}/users/{{user}}/instantpoll
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_URI} !^/(static|ws)/
+RewriteRule ^(.*) http://127.0.0.1:{{gunicorn_port}}/$1 [proxy,last]
+RewriteCond %{REQUEST_URI} !^/static/
+RewriteRule ^(.*) ws://127.0.0.1:{{gunicorn_port}}/$1 [proxy,last]

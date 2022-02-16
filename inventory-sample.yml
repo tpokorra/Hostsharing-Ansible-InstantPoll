@@ -10,3 +10,4 @@ instantpoll:
       redispassword: testpassw0rd_changeme
       redisport: 11111
       django_secret_key: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      gunicorn_port: 8000

@@ -4,7 +4,7 @@ SECRET_KEY = '{{django_secret_key}}'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["{{domain}}", "{{pac}}.hostsharing.net"]
+ALLOWED_HOSTS = ["{{domain}}", "{{pac}}.hostsharing.net", "127.0.0.1"]
 
 CHANNEL_LAYERS = {
     'default': {
