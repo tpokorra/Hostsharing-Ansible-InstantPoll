@@ -4,7 +4,9 @@ SECRET_KEY = '{{django_secret_key}}'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["{{domain}}", "{{pac}}.hostsharing.net", "127.0.0.1"]
+# TODO poll.iccmeurope.org?
+ALLOWED_HOSTS = ["{{domain}}", "{{domain2}}", "{{pac}}.hostsharing.net", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["{{domain}}", "{{domain2}}"]
 
 CHANNEL_LAYERS = {
     'default': {

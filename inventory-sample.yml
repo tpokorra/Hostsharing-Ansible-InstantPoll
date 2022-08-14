@@ -5,6 +5,7 @@ instantpoll:
       ansible_ssh_user: xyz00
       pac: xyz00
       domain: poll.example.org
+      domain2: poll.example.org
       user: poll
       password: testpassw0rd_changeme
       redispassword: testpassw0rd_changeme

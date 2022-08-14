@@ -108,6 +108,14 @@
       dest: "/home/pacs/{{pac}}/users/{{user}}/bin/start_gunicorn.sh"
       mode: '0744'
 
+  - name: upload gunicorn stop script
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    template:
+      src: "templates/stop_gunicorn.sh"
+      dest: "/home/pacs/{{pac}}/users/{{user}}/bin/stop_gunicorn.sh"
+      mode: '0744'
+
   - name: upload restart script
     become: yes
     become_user: "{{pac}}-{{user}}"
@@ -168,12 +176,6 @@
       src: "templates/htaccess"
       #dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/.htaccess"
       dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/htdocs-ssl/.htaccess"
-  - name: upload passenger wsgi file
-    become: yes
-    become_user: "{{pac}}-{{user}}"
-    template:
-      src: "templates/passenger_wsgi.py"
-      dest: "/home/pacs/{{pac}}/users/{{user}}/doms/{{domain}}/app-ssl/passenger_wsgi.py"
 
   ####################################
   ## install cron jobs
@@ -194,9 +196,9 @@
       hour: "1"
       job: "/usr/sbin/logrotate -s $HOME/.logrotate.state $HOME/.logrotate"
 
-  ##############################################
-  ## start the redis service via monit
-  ##############################################
+  ##################################################
+  ## start the redis and gunicorn services via monit
+  ##################################################
   - name: start monit
     become: yes
     become_user: "{{pac}}-{{user}}"
